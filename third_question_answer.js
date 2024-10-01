@@ -1,21 +1,27 @@
-const numbers = [1, 2, 8, 6, 9, 8];
+const numbers = [1, 1,2];
 
 const findBiggestSingleNum = (testNumber) => {
-    if(!testNumber || !Array.isArray(testNumber)) return null;
+    if (!testNumber || !Array.isArray(testNumber)) return null;
 
+    let repeatedNum = [];
     let nonRepeatedNum = [];
 
     for (let i = 0; i < testNumber.length; i++) {
         for (let j = i + 1; j < testNumber.length; j++) {
-            if (testNumber[i] === testNumber[j]) {
-                nonRepeatedNum += testNumber[i];
-                continue;
-            }
+            if (testNumber[i] === testNumber[j])
+                repeatedNum.push(testNumber[i]);
+            continue;
         }
-        console.log({nonRepeatedNum})
-        if (!nonRepeatedNum.includes(testNumber[i])) return i;
+        if (!repeatedNum.includes(testNumber[i])) nonRepeatedNum.push(testNumber[i]);
+        console.log({ repeatedNum, nonRepeatedNum });
     }
+    if (nonRepeatedNum.length === 0) return null;
 
+    let bigNUm = nonRepeatedNum[0];
+    nonRepeatedNum.forEach(num => {
+        if (num > bigNUm) bigNUm = num;
+    })
+    return bigNUm;
 }
 
 
